@@ -1,0 +1,22 @@
+# secrets
+.env
+backend/.env
+
+# python
+.venv/
+__pycache__/
+*.pyc
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# node / vite
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# data (regenerate with scripts/make_sample_data.py)
+data/*.csv
+
+# misc
+.DS_Store
+*.log

@@ -1,0 +1,20 @@
+# secrets — never commit
+.env
+*.env
+**/.env
+*.hostenv
+*_token*
+*.pem
+# python
+**/__pycache__/
+*.pyc
+.venv/
+# node / build output
+**/node_modules/
+**/dist/
+**/.vite/
+# data / logs
+**/*.log
+saarthi/data/*.csv
+saarthi/backend/uploads/*
+!saarthi/backend/uploads/.gitkeep
