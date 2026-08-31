@@ -61,6 +61,366 @@
         "xgb",
         "cat"
       ]
+    },
+    "lending_club": {
+      "uncalibrated_test": {
+        "auc": 0.72638,
+        "pr_auc": 0.41511,
+        "brier": 0.20917,
+        "ece": 0.23617,
+        "gini": 0.45276,
+        "n": 342392,
+        "base_rate": 0.21235
+      },
+      "calibrated_test": {
+        "auc": 0.72628,
+        "pr_auc": 0.41038,
+        "brier": 0.14842,
+        "ece": 0.00242,
+        "gini": 0.45256,
+        "n": 342392,
+        "base_rate": 0.21235
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.72571,
+          "pr_auc": 0.41398,
+          "brier": 0.20907,
+          "ece": 0.23511,
+          "gini": 0.45142,
+          "n": 342392,
+          "base_rate": 0.21235
+        },
+        "xgb": {
+          "auc": 0.72496,
+          "pr_auc": 0.41335,
+          "brier": 0.20779,
+          "ece": 0.23177,
+          "gini": 0.44993,
+          "n": 342392,
+          "base_rate": 0.21235
+        },
+        "cat": {
+          "auc": 0.72527,
+          "pr_auc": 0.41297,
+          "brier": 0.21182,
+          "ece": 0.24162,
+          "gini": 0.45054,
+          "n": 342392,
+          "base_rate": 0.21235
+        }
+      },
+      "split": {
+        "fit": 821739,
+        "cal": 205435,
+        "test": 342392
+      },
+      "train_seconds": 313.2,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    },
+    "home_credit": {
+      "uncalibrated_test": {
+        "auc": 0.76391,
+        "pr_auc": 0.25504,
+        "brier": 0.14005,
+        "ece": 0.2309,
+        "gini": 0.52782,
+        "n": 76879,
+        "base_rate": 0.08072
+      },
+      "calibrated_test": {
+        "auc": 0.76316,
+        "pr_auc": 0.24491,
+        "brier": 0.06737,
+        "ece": 0.00106,
+        "gini": 0.52632,
+        "n": 76879,
+        "base_rate": 0.08072
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.76161,
+          "pr_auc": 0.25264,
+          "brier": 0.13299,
+          "ece": 0.20947,
+          "gini": 0.52322,
+          "n": 76879,
+          "base_rate": 0.08072
+        },
+        "xgb": {
+          "auc": 0.74833,
+          "pr_auc": 0.2422,
+          "brier": 0.12857,
+          "ece": 0.19716,
+          "gini": 0.49666,
+          "n": 76879,
+          "base_rate": 0.08072
+        },
+        "cat": {
+          "auc": 0.76386,
+          "pr_auc": 0.25336,
+          "brier": 0.17028,
+          "ece": 0.28606,
+          "gini": 0.52773,
+          "n": 76879,
+          "base_rate": 0.08072
+        }
+      },
+      "split": {
+        "fit": 184506,
+        "cal": 46126,
+        "test": 76879
+      },
+      "train_seconds": 847.8,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    },
+    "gmsc": {
+      "uncalibrated_test": {
+        "auc": 0.85285,
+        "pr_auc": 0.38106,
+        "brier": 0.1069,
+        "ece": 0.17457,
+        "gini": 0.7057,
+        "n": 37500,
+        "base_rate": 0.06683
+      },
+      "calibrated_test": {
+        "auc": 0.85219,
+        "pr_auc": 0.36286,
+        "brier": 0.05019,
+        "ece": 0.00414,
+        "gini": 0.70439,
+        "n": 37500,
+        "base_rate": 0.06683
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.84924,
+          "pr_auc": 0.37588,
+          "brier": 0.10118,
+          "ece": 0.15231,
+          "gini": 0.69849,
+          "n": 37500,
+          "base_rate": 0.06683
+        },
+        "xgb": {
+          "auc": 0.84359,
+          "pr_auc": 0.363,
+          "brier": 0.10092,
+          "ece": 0.15575,
+          "gini": 0.68719,
+          "n": 37500,
+          "base_rate": 0.06683
+        },
+        "cat": {
+          "auc": 0.85575,
+          "pr_auc": 0.38912,
+          "brier": 0.12636,
+          "ece": 0.21565,
+          "gini": 0.7115,
+          "n": 37500,
+          "base_rate": 0.06683
+        }
+      },
+      "split": {
+        "fit": 90000,
+        "cal": 22500,
+        "test": 37500
+      },
+      "train_seconds": 30.3,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    },
+    "taiwan": {
+      "uncalibrated_test": {
+        "auc": 0.77195,
+        "pr_auc": 0.54858,
+        "brier": 0.1552,
+        "ece": 0.10805,
+        "gini": 0.5439,
+        "n": 7500,
+        "base_rate": 0.2212
+      },
+      "calibrated_test": {
+        "auc": 0.76981,
+        "pr_auc": 0.5243,
+        "brier": 0.13654,
+        "ece": 0.00741,
+        "gini": 0.53962,
+        "n": 7500,
+        "base_rate": 0.2212
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.7665,
+          "pr_auc": 0.53502,
+          "brier": 0.15551,
+          "ece": 0.09934,
+          "gini": 0.533,
+          "n": 7500,
+          "base_rate": 0.2212
+        },
+        "xgb": {
+          "auc": 0.76662,
+          "pr_auc": 0.53978,
+          "brier": 0.15536,
+          "ece": 0.1021,
+          "gini": 0.53324,
+          "n": 7500,
+          "base_rate": 0.2212
+        },
+        "cat": {
+          "auc": 0.7736,
+          "pr_auc": 0.5542,
+          "brier": 0.16475,
+          "ece": 0.14506,
+          "gini": 0.5472,
+          "n": 7500,
+          "base_rate": 0.2212
+        }
+      },
+      "split": {
+        "fit": 18000,
+        "cal": 4500,
+        "test": 7500
+      },
+      "train_seconds": 19.6,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    },
+    "german": {
+      "uncalibrated_test": {
+        "auc": 0.77524,
+        "pr_auc": 0.62165,
+        "brier": 0.18357,
+        "ece": 0.1152,
+        "gini": 0.55048,
+        "n": 250,
+        "base_rate": 0.3
+      },
+      "calibrated_test": {
+        "auc": 0.76682,
+        "pr_auc": 0.55053,
+        "brier": 0.1726,
+        "ece": 0.068,
+        "gini": 0.53364,
+        "n": 250,
+        "base_rate": 0.3
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.75573,
+          "pr_auc": 0.60112,
+          "brier": 0.19909,
+          "ece": 0.13886,
+          "gini": 0.51147,
+          "n": 250,
+          "base_rate": 0.3
+        },
+        "xgb": {
+          "auc": 0.74811,
+          "pr_auc": 0.58436,
+          "brier": 0.20829,
+          "ece": 0.15212,
+          "gini": 0.49623,
+          "n": 250,
+          "base_rate": 0.3
+        },
+        "cat": {
+          "auc": 0.79078,
+          "pr_auc": 0.62009,
+          "brier": 0.17517,
+          "ece": 0.1206,
+          "gini": 0.58156,
+          "n": 250,
+          "base_rate": 0.3
+        }
+      },
+      "split": {
+        "fit": 600,
+        "cal": 150,
+        "test": 250
+      },
+      "train_seconds": 11.9,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    },
+    "berka": {
+      "uncalibrated_test": {
+        "auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0,
+        "ece": 0.00139,
+        "gini": 1.0,
+        "n": 171,
+        "base_rate": 0.11111
+      },
+      "calibrated_test": {
+        "auc": 1.0,
+        "pr_auc": 1.0,
+        "brier": 0.0,
+        "ece": 0.0,
+        "gini": 1.0,
+        "n": 171,
+        "base_rate": 0.11111
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 1.0,
+          "pr_auc": 1.0,
+          "brier": 0.0,
+          "ece": 0.00033,
+          "gini": 1.0,
+          "n": 171,
+          "base_rate": 0.11111
+        },
+        "xgb": {
+          "auc": 1.0,
+          "pr_auc": 1.0,
+          "brier": 1e-05,
+          "ece": 0.00303,
+          "gini": 1.0,
+          "n": 171,
+          "base_rate": 0.11111
+        },
+        "cat": {
+          "auc": 1.0,
+          "pr_auc": 1.0,
+          "brier": 0.0,
+          "ece": 0.00081,
+          "gini": 1.0,
+          "n": 171,
+          "base_rate": 0.11111
+        }
+      },
+      "split": {
+        "fit": 409,
+        "cal": 102,
+        "test": 171
+      },
+      "train_seconds": 2.8,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
     }
   },
   "pooled": {},

@@ -63,6 +63,32 @@ def run_pipeline(job: Job, upload_path: str, mapping: Dict[str, Optional[str]],
     if bundle.X.shape[1] == 0:
         raise ValueError("no usable features after mapping")
 
+    # ---- stack the pre-trained global prior in as a feature --------------
+    # The global model was trained offline on ~3.3M public loans in a shared
+    # canonical vocabulary. Feeding its calibrated PD in as one extra column
+    # lets this bank's book REFINE a prior instead of starting from zero, and
+    # is a no-op when the bundle is absent or the upload maps too few fields.
+    try:
+        from pipeline import pretrained
+        if pretrained.available():
+            ident = {k: k for k in pretrained.APP_TO_GLOBAL}
+            cov = pretrained.coverage(bundle.raw_features, ident)
+            if cov >= 0.25:
+                gp = pretrained.score(bundle.raw_features, ident)
+                if gp is not None and len(gp) == len(bundle.X):
+                    bundle.X["global_prior_pd"] = gp.astype("float32")
+                    bundle.feature_names = list(bundle.X.columns)
+                    warnings.append(
+                        "Used SAARTHI's pre-trained global model (trained on public "
+                        "credit datasets) as an extra input, so this run starts from "
+                        "prior knowledge rather than from scratch.")
+            else:
+                warnings.append(
+                    "Pre-trained global model skipped: too few standard fields were "
+                    "mapped for it to contribute reliably.")
+    except Exception as e:  # noqa: BLE001 - never let the prior break a run
+        print(f"[orchestrator] global prior unavailable: {e}", flush=True)
+
     # ---- train + score ---------------------------------------------------
     prog("train", 30, "Training & calibrating model")
     artifacts = train_and_score(bundle, progress=prog)

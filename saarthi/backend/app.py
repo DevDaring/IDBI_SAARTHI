@@ -58,7 +58,23 @@ def models():
         "health": GATEWAY.health,
         "trace": TRACE.recent(40),
         "call_counts": TRACE.counts(),
+        "pretrained": _pretrained_info(),
     })
+
+
+def _pretrained_info() -> dict:
+    """Non-secret summary of the offline-trained global credit model."""
+    try:
+        from pipeline import pretrained
+        return pretrained.info()
+    except Exception as e:  # noqa: BLE001
+        return {"available": False, "error": str(e)[:120]}
+
+
+@app.get("/api/pretrained")
+def pretrained_endpoint():
+    """What the shipped global model is and how it scored on held-out data."""
+    return jsonify(_pretrained_info())
 
 
 @app.post("/api/upload")

@@ -352,12 +352,27 @@ def load_german(nrows: Optional[int] = None) -> Corpus:
 # ---------------------------------------------------------------------------
 # 7. Berka - loans WITH transaction sequences (sequence->default validation)
 # ---------------------------------------------------------------------------
-def load_berka(nrows: Optional[int] = None) -> Corpus:
+def load_berka(nrows: Optional[int] = None, preloan_only: bool = True) -> Corpus:
+    """Berka loans.
+
+    IMPORTANT (temporal discipline): 71% of an account's transactions occur
+    AFTER the loan was granted, and those encode the very repayment behaviour
+    that defines the label -- using them yields a leaked AUC of 1.00. With
+    `preloan_only` (default) only transactions strictly BEFORE the loan date
+    are aggregated, which is the honest origination-time setup.
+    """
     loan = pd.read_csv(f"{DATA}/berka/loan.csv", sep=";")
     acct = pd.read_csv(f"{DATA}/berka/account.csv", sep=";")
     trans = pd.read_csv(f"{DATA}/berka/trans.csv", sep=";", low_memory=False)
     # A finished-ok, C running-ok => 0 ; B finished-unpaid, D running-debt => 1
     y = loan["status"].isin(["B", "D"]).astype(int)
+
+    if preloan_only:
+        trans = (trans.merge(loan[["account_id", "date"]]
+                             .rename(columns={"date": "__loan_date"}),
+                             on="account_id", how="inner")
+                 .query("date < __loan_date")
+                 .drop(columns="__loan_date"))
 
     tagg = trans.groupby("account_id").agg(
         txn_n=("amount", "size"),
