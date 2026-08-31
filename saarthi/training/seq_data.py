@@ -122,10 +122,24 @@ def build_tabformer(max_users: Optional[int] = None,
     return p
 
 
-def build_berka() -> str:
-    """Real bank transactions WITH loan default labels - the end-to-end proof."""
+def build_berka(preloan_only: bool = False, suffix: str = "") -> str:
+    """Real bank transactions WITH loan default labels - the end-to-end proof.
+
+    `preloan_only=True` keeps only transactions strictly before the loan date.
+    Required for any LABELLED evaluation: 71% of an account's transactions come
+    after origination and encode the repayment behaviour that defines the label.
+    The full-history version is still fine for unlabelled contrastive
+    pre-training, where no label is ever consulted.
+    """
     trans = pd.read_csv(f"{DATA}/berka/trans.csv", sep=";", low_memory=False)
     loan = pd.read_csv(f"{DATA}/berka/loan.csv", sep=";")
+
+    if preloan_only:
+        trans = (trans.merge(loan[["account_id", "date"]]
+                             .rename(columns={"date": "__loan_date"}),
+                             on="account_id", how="inner")
+                 .query("date < __loan_date")
+                 .drop(columns="__loan_date"))
 
     trans["ts"] = pd.to_numeric(trans["date"], errors="coerce")
     trans = trans.sort_values(["account_id", "ts"], kind="stable")
@@ -147,14 +161,14 @@ def build_berka() -> str:
     out["dt"] = out.groupby("client_id")["ts"].diff().fillna(0).values
     out["dt_bucket"] = dt_bucket(out["dt"].values)
     out = out.groupby("client_id", group_keys=False).apply(_standardise)
-    p = f"{OUT}/berka_seq.parquet"
+    p = f"{OUT}/berka{suffix}_seq.parquet"
     out.drop(columns=["ts", "dt"]).to_parquet(p, index=False)
 
     lab = pd.DataFrame({
         "client_id": "BK_" + loan["account_id"].astype(str),
         "target": loan["status"].isin(["B", "D"]).astype(int),
     })
-    lab.to_parquet(f"{OUT}/berka_labels.parquet", index=False)
+    lab.to_parquet(f"{OUT}/berka{suffix}_labels.parquet", index=False)
     print(f"  berka: {out.client_id.nunique():,} clients, {len(out):,} events, "
           f"{len(lab):,} labels (rate {lab.target.mean():.4f}) -> {p}", flush=True)
     return p

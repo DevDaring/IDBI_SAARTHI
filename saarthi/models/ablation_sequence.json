@@ -1,0 +1,62 @@
+{
+  "berka": {
+    "tabular": {
+      "auc": 0.85751,
+      "pr_auc": 0.49203,
+      "brier": 0.07701,
+      "ece": 0.03822,
+      "gini": 0.71503,
+      "n": 171,
+      "base_rate": 0.11111
+    },
+    "sequence": {
+      "auc": 0.80973,
+      "pr_auc": 0.31424,
+      "brier": 0.08632,
+      "ece": 0.06201,
+      "gini": 0.61946,
+      "n": 171,
+      "base_rate": 0.11111
+    },
+    "tabular+sequence": {
+      "auc": 0.88418,
+      "pr_auc": 0.56871,
+      "brier": 0.06337,
+      "ece": 0.02681,
+      "gini": 0.76835,
+      "n": 171,
+      "base_rate": 0.11111
+    },
+    "auc_lift_from_sequence": 0.02667
+  },
+  "amex": {
+    "tabular": {
+      "auc": 0.95905,
+      "pr_auc": 0.88494,
+      "brier": 0.07067,
+      "ece": 0.00869,
+      "gini": 0.91811,
+      "n": 15000,
+      "base_rate": 0.2618
+    },
+    "sequence": {
+      "auc": 0.91563,
+      "pr_auc": 0.76773,
+      "brier": 0.10158,
+      "ece": 0.00762,
+      "gini": 0.83127,
+      "n": 15000,
+      "base_rate": 0.2618
+    },
+    "tabular+sequence": {
+      "auc": 0.95846,
+      "pr_auc": 0.88356,
+      "brier": 0.07103,
+      "ece": 0.00585,
+      "gini": 0.91692,
+      "n": 15000,
+      "base_rate": 0.2618
+    },
+    "auc_lift_from_sequence": -0.00059
+  }
+}

@@ -364,48 +364,48 @@
     },
     "berka": {
       "uncalibrated_test": {
-        "auc": 1.0,
-        "pr_auc": 1.0,
-        "brier": 0.0,
-        "ece": 0.00139,
-        "gini": 1.0,
+        "auc": 0.87708,
+        "pr_auc": 0.61967,
+        "brier": 0.07064,
+        "ece": 0.05592,
+        "gini": 0.75416,
         "n": 171,
         "base_rate": 0.11111
       },
       "calibrated_test": {
-        "auc": 1.0,
-        "pr_auc": 1.0,
-        "brier": 0.0,
-        "ece": 0.0,
-        "gini": 1.0,
+        "auc": 0.85578,
+        "pr_auc": 0.57253,
+        "brier": 0.06747,
+        "ece": 0.02955,
+        "gini": 0.71157,
         "n": 171,
         "base_rate": 0.11111
       },
       "per_member_test": {
         "lgbm": {
-          "auc": 1.0,
-          "pr_auc": 1.0,
-          "brier": 0.0,
-          "ece": 0.00033,
-          "gini": 1.0,
+          "auc": 0.88089,
+          "pr_auc": 0.59759,
+          "brier": 0.07508,
+          "ece": 0.06377,
+          "gini": 0.76177,
           "n": 171,
           "base_rate": 0.11111
         },
         "xgb": {
-          "auc": 1.0,
-          "pr_auc": 1.0,
-          "brier": 1e-05,
-          "ece": 0.00303,
-          "gini": 1.0,
+          "auc": 0.88158,
+          "pr_auc": 0.651,
+          "brier": 0.06728,
+          "ece": 0.06099,
+          "gini": 0.76316,
           "n": 171,
           "base_rate": 0.11111
         },
         "cat": {
-          "auc": 1.0,
-          "pr_auc": 1.0,
-          "brier": 0.0,
-          "ece": 0.00081,
-          "gini": 1.0,
+          "auc": 0.82999,
+          "pr_auc": 0.56659,
+          "brier": 0.07593,
+          "ece": 0.06894,
+          "gini": 0.65997,
           "n": 171,
           "base_rate": 0.11111
         }
@@ -415,14 +415,349 @@
         "cal": 102,
         "test": 171
       },
-      "train_seconds": 2.8,
+      "train_seconds": 6.8,
       "members": [
         "lgbm",
         "xgb",
         "cat"
       ]
+    },
+    "amex": {
+      "uncalibrated_test": {
+        "auc": 0.95817,
+        "pr_auc": 0.89247,
+        "brier": 0.07574,
+        "ece": 0.04162,
+        "gini": 0.91633,
+        "n": 30000,
+        "base_rate": 0.25983
+      },
+      "calibrated_test": {
+        "auc": 0.95796,
+        "pr_auc": 0.88581,
+        "brier": 0.07064,
+        "ece": 0.00502,
+        "gini": 0.91591,
+        "n": 30000,
+        "base_rate": 0.25983
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.95756,
+          "pr_auc": 0.89073,
+          "brier": 0.07557,
+          "ece": 0.03815,
+          "gini": 0.91512,
+          "n": 30000,
+          "base_rate": 0.25983
+        },
+        "xgb": {
+          "auc": 0.95721,
+          "pr_auc": 0.89041,
+          "brier": 0.07588,
+          "ece": 0.03907,
+          "gini": 0.91443,
+          "n": 30000,
+          "base_rate": 0.25983
+        },
+        "cat": {
+          "auc": 0.95735,
+          "pr_auc": 0.89028,
+          "brier": 0.07999,
+          "ece": 0.05991,
+          "gini": 0.91469,
+          "n": 30000,
+          "base_rate": 0.25983
+        }
+      },
+      "split": {
+        "fit": 72000,
+        "cal": 18000,
+        "test": 30000
+      },
+      "train_seconds": 566.9,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    },
+    "hc2024": {
+      "error": "TypeError: object of type 'numpy.bool' has no len()"
     }
   },
-  "pooled": {},
-  "lodo": {}
+  "pooled": {
+    "uncalibrated_test": {
+      "auc": 0.86058,
+      "pr_auc": 0.58803,
+      "brier": 0.14928,
+      "ece": 0.21003,
+      "gini": 0.72116,
+      "n": 270421,
+      "base_rate": 0.14555
+    },
+    "calibrated_test": {
+      "auc": 0.86047,
+      "pr_auc": 0.57954,
+      "brier": 0.08676,
+      "ece": 0.00176,
+      "gini": 0.72094,
+      "n": 270421,
+      "base_rate": 0.14555
+    },
+    "per_member_test": {
+      "lgbm": {
+        "auc": 0.86067,
+        "pr_auc": 0.58929,
+        "brier": 0.14837,
+        "ece": 0.20657,
+        "gini": 0.72135,
+        "n": 270421,
+        "base_rate": 0.14555
+      },
+      "xgb": {
+        "auc": 0.85863,
+        "pr_auc": 0.58613,
+        "brier": 0.14788,
+        "ece": 0.20508,
+        "gini": 0.71726,
+        "n": 270421,
+        "base_rate": 0.14555
+      },
+      "cat": {
+        "auc": 0.85908,
+        "pr_auc": 0.58117,
+        "brier": 0.15355,
+        "ece": 0.21845,
+        "gini": 0.71815,
+        "n": 270421,
+        "base_rate": 0.14555
+      }
+    },
+    "split": {
+      "fit": 649009,
+      "cal": 162252,
+      "test": 270421
+    },
+    "train_seconds": 154.4,
+    "members": [
+      "lgbm",
+      "xgb",
+      "cat"
+    ],
+    "datasets": [
+      "sba",
+      "lending_club",
+      "home_credit",
+      "gmsc",
+      "taiwan",
+      "german",
+      "berka"
+    ],
+    "normalised": true
+  },
+  "lodo": {
+    "berka": {
+      "auc": 0.51549,
+      "pr_auc": 0.11137,
+      "brier": 0.11782,
+      "ece": 0.10719,
+      "gini": 0.03098,
+      "n": 682,
+      "base_rate": 0.11144
+    },
+    "german": {
+      "auc": 0.40224,
+      "pr_auc": 0.25219,
+      "brier": 0.2571,
+      "ece": 0.19897,
+      "gini": -0.19552,
+      "n": 1000,
+      "base_rate": 0.3
+    },
+    "gmsc": {
+      "auc": 0.77113,
+      "pr_auc": 0.24962,
+      "brier": 0.08841,
+      "ece": 0.18062,
+      "gini": 0.54226,
+      "n": 150000,
+      "base_rate": 0.06684
+    },
+    "home_credit": {
+      "auc": 0.57854,
+      "pr_auc": 0.10119,
+      "brier": 0.11983,
+      "ece": 0.18925,
+      "gini": 0.15707,
+      "n": 300000,
+      "base_rate": 0.08076
+    },
+    "lending_club": {
+      "auc": 0.53986,
+      "pr_auc": 0.23571,
+      "brier": 0.18794,
+      "ece": 0.14079,
+      "gini": 0.07971,
+      "n": 300000,
+      "base_rate": 0.21212
+    },
+    "sba": {
+      "auc": 0.25738,
+      "pr_auc": 0.11727,
+      "brier": 0.16272,
+      "ece": 0.15218,
+      "gini": -0.48525,
+      "n": 300000,
+      "base_rate": 0.17512
+    },
+    "taiwan": {
+      "auc": 0.69894,
+      "pr_auc": 0.40759,
+      "brier": 0.17723,
+      "ece": 0.14459,
+      "gini": 0.39788,
+      "n": 30000,
+      "base_rate": 0.2212
+    }
+  },
+  "notes": {
+    "berka_leakage_fix": "Berka aggregates ONLY pre-origination transactions. Using the full history leaks the label (71% of transactions post-date the loan) and yields AUC 1.0000, which is not reported."
+  },
+  "pooled_raw": {
+    "uncalibrated_test": {
+      "auc": 0.8594,
+      "pr_auc": 0.58403,
+      "brier": 0.15075,
+      "ece": 0.21275,
+      "gini": 0.7188,
+      "n": 270421,
+      "base_rate": 0.14555
+    },
+    "calibrated_test": {
+      "auc": 0.85932,
+      "pr_auc": 0.57674,
+      "brier": 0.08721,
+      "ece": 0.00149,
+      "gini": 0.71864,
+      "n": 270421,
+      "base_rate": 0.14555
+    },
+    "per_member_test": {
+      "lgbm": {
+        "auc": 0.86009,
+        "pr_auc": 0.58794,
+        "brier": 0.14937,
+        "ece": 0.20785,
+        "gini": 0.72019,
+        "n": 270421,
+        "base_rate": 0.14555
+      },
+      "xgb": {
+        "auc": 0.85282,
+        "pr_auc": 0.56994,
+        "brier": 0.15216,
+        "ece": 0.21138,
+        "gini": 0.70564,
+        "n": 270421,
+        "base_rate": 0.14555
+      },
+      "cat": {
+        "auc": 0.85869,
+        "pr_auc": 0.58063,
+        "brier": 0.15401,
+        "ece": 0.21902,
+        "gini": 0.71738,
+        "n": 270421,
+        "base_rate": 0.14555
+      }
+    },
+    "split": {
+      "fit": 649009,
+      "cal": 162252,
+      "test": 270421
+    },
+    "train_seconds": 134.0,
+    "members": [
+      "lgbm",
+      "xgb",
+      "cat"
+    ],
+    "datasets": [
+      "sba",
+      "lending_club",
+      "home_credit",
+      "gmsc",
+      "taiwan",
+      "german",
+      "berka"
+    ]
+  },
+  "lodo_raw": {
+    "berka": {
+      "auc": 0.46123,
+      "pr_auc": 0.10863,
+      "brier": 0.10266,
+      "ece": 0.04246,
+      "gini": -0.07754,
+      "n": 682,
+      "base_rate": 0.11144
+    },
+    "german": {
+      "auc": 0.46458,
+      "pr_auc": 0.29047,
+      "brier": 0.23741,
+      "ece": 0.15139,
+      "gini": -0.07084,
+      "n": 1000,
+      "base_rate": 0.3
+    },
+    "gmsc": {
+      "auc": 0.77861,
+      "pr_auc": 0.28425,
+      "brier": 0.08594,
+      "ece": 0.17679,
+      "gini": 0.55722,
+      "n": 150000,
+      "base_rate": 0.06684
+    },
+    "home_credit": {
+      "auc": 0.4991,
+      "pr_auc": 0.07872,
+      "brier": 0.22521,
+      "ece": 0.37382,
+      "gini": -0.0018,
+      "n": 300000,
+      "base_rate": 0.08076
+    },
+    "lending_club": {
+      "auc": 0.52276,
+      "pr_auc": 0.22327,
+      "brier": 0.18042,
+      "ece": 0.11233,
+      "gini": 0.04551,
+      "n": 300000,
+      "base_rate": 0.21212
+    },
+    "sba": {
+      "auc": 0.41031,
+      "pr_auc": 0.15392,
+      "brier": 0.17302,
+      "ece": 0.1638,
+      "gini": -0.17938,
+      "n": 300000,
+      "base_rate": 0.17512
+    },
+    "taiwan": {
+      "auc": 0.7038,
+      "pr_auc": 0.45141,
+      "brier": 0.15338,
+      "ece": 0.07019,
+      "gini": 0.40759,
+      "n": 30000,
+      "base_rate": 0.2212
+    }
+  },
+  "lodo_mean_auc": 0.5377,
+  "lodo_raw_mean_auc": 0.5486
 }

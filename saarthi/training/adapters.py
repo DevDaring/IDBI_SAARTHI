@@ -509,9 +509,34 @@ def load(name: str, **kw) -> Corpus:
     return LOADERS[name](**kw)
 
 
+def rank_normalise(X: pd.DataFrame) -> pd.DataFrame:
+    """Map every numeric canonical column onto its within-dataset percentile.
+
+    Essential for cross-corpus pooling: raw magnitudes are not comparable across
+    currencies and eras (SBA in USD ~1e5, German in DM ~3e3, Taiwan in NT$ ~1e5,
+    Berka in CZK). Percentile rank keeps the ordering that carries the credit
+    signal while removing the scale that does not transfer.
+    """
+    out = X.copy()
+    for c in CANON_NUM:
+        if c not in out.columns:
+            continue
+        v = pd.to_numeric(out[c], errors="coerce")
+        if v.notna().sum() < 10:
+            out[c] = np.nan
+            continue
+        out[c] = v.rank(pct=True, na_option="keep").astype("float32")
+    return out
+
+
 def build_pool(names: List[str] = None, cap_per_dataset: int = 300_000,
-               seed: int = 20260502) -> Dict:
-    """Concatenate canonical frames from several corpora into one training set."""
+               seed: int = 20260502, normalise: bool = True) -> Dict:
+    """Concatenate canonical frames from several corpora into one training set.
+
+    With `normalise` (default) each corpus's numeric features are converted to
+    within-corpus percentile ranks BEFORE pooling, so the model learns relative
+    creditworthiness rather than currency-specific magnitudes.
+    """
     names = names or POOLABLE
     Xs, ys, tags = [], [], []
     rng = np.random.RandomState(seed)
@@ -521,6 +546,8 @@ def build_pool(names: List[str] = None, cap_per_dataset: int = 300_000,
         if len(X) > cap_per_dataset:
             idx = rng.choice(len(X), cap_per_dataset, replace=False)
             X, y = X.iloc[idx].reset_index(drop=True), y.iloc[idx].reset_index(drop=True)
+        if normalise:
+            X = rank_normalise(X)
         Xs.append(X)
         ys.append(y)
         tags.append(pd.Series([n] * len(X)))
@@ -529,7 +556,8 @@ def build_pool(names: List[str] = None, cap_per_dataset: int = 300_000,
     for c in CANON_CAT:
         X[c] = X[c].astype("category")
     return {"X": X, "y": pd.concat(ys, ignore_index=True).reset_index(drop=True),
-            "dataset": pd.concat(tags, ignore_index=True).reset_index(drop=True)}
+            "dataset": pd.concat(tags, ignore_index=True).reset_index(drop=True),
+            "normalised": normalise}
 
 
 if __name__ == "__main__":
