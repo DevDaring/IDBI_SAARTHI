@@ -1,0 +1,6 @@
+
+=== specialist: sba ===
+    sba              n=  897,167  native=  16  default_rate=0.1756  US small-business loans; MSME anchor
+    AUC(test)=0.9800  PR=0.9126  ECE=0.0015  (149.3s)
+
+=== specialist: lending_club ===

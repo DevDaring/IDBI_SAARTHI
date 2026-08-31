@@ -1,0 +1,68 @@
+{
+  "seed": 20260502,
+  "created": "2026-08-31 11:06:33",
+  "specialists": {
+    "sba": {
+      "uncalibrated_test": {
+        "auc": 0.98006,
+        "pr_auc": 0.91569,
+        "brier": 0.04957,
+        "ece": 0.06379,
+        "gini": 0.96011,
+        "n": 224292,
+        "base_rate": 0.17561
+      },
+      "calibrated_test": {
+        "auc": 0.98001,
+        "pr_auc": 0.91265,
+        "brier": 0.03779,
+        "ece": 0.00153,
+        "gini": 0.96001,
+        "n": 224292,
+        "base_rate": 0.17561
+      },
+      "per_member_test": {
+        "lgbm": {
+          "auc": 0.98031,
+          "pr_auc": 0.91761,
+          "brier": 0.04878,
+          "ece": 0.05966,
+          "gini": 0.96062,
+          "n": 224292,
+          "base_rate": 0.17561
+        },
+        "xgb": {
+          "auc": 0.97817,
+          "pr_auc": 0.9118,
+          "brier": 0.05141,
+          "ece": 0.06325,
+          "gini": 0.95633,
+          "n": 224292,
+          "base_rate": 0.17561
+        },
+        "cat": {
+          "auc": 0.97941,
+          "pr_auc": 0.91138,
+          "brier": 0.05159,
+          "ece": 0.06845,
+          "gini": 0.95883,
+          "n": 224292,
+          "base_rate": 0.17561
+        }
+      },
+      "split": {
+        "fit": 538300,
+        "cal": 134575,
+        "test": 224292
+      },
+      "train_seconds": 149.3,
+      "members": [
+        "lgbm",
+        "xgb",
+        "cat"
+      ]
+    }
+  },
+  "pooled": {},
+  "lodo": {}
+}

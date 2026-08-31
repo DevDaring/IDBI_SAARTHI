@@ -1,0 +1,343 @@
+<title>SAARTHI Model Battle Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@600&display=swap">
+<style>
+  :root{
+    --paper:#F8F7F3; --card:#FFFFFF; --card-tint:#FDF9F0;
+    --ink:#141D2B; --ink-soft:#33415A; --mute:#5C6B80;
+    --line:#E3E0D5; --line-strong:#C9C5B6;
+    --accent:#B45309; --accent-bright:#D97706; --accent-wash:#FBF0DC;
+    --safe:#0F766E; --safe-wash:#E4F2F0;
+    --danger:#B91C1C; --danger-wash:#F9E9E7;
+    --code-bg:#EFEDE4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1520; --card:#161F2D; --card-tint:#1A2230;
+      --ink:#E9E7DF; --ink-soft:#C4C9D4; --mute:#8C99AC;
+      --line:#273244; --line-strong:#3A4759;
+      --accent:#F59E0B; --accent-bright:#FBBF24; --accent-wash:#2A2416;
+      --safe:#2DD4BF; --safe-wash:#12302E;
+      --danger:#F87171; --danger-wash:#361A1A;
+      --code-bg:#1C2635;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1520; --card:#161F2D; --card-tint:#1A2230;
+    --ink:#E9E7DF; --ink-soft:#C4C9D4; --mute:#8C99AC;
+    --line:#273244; --line-strong:#3A4759;
+    --accent:#F59E0B; --accent-bright:#FBBF24; --accent-wash:#2A2416;
+    --safe:#2DD4BF; --safe-wash:#12302E;
+    --danger:#F87171; --danger-wash:#361A1A;
+    --code-bg:#1C2635;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px 96px}
+
+  /* ---------- masthead ---------- */
+  header{padding:64px 0 40px; border-bottom:3px double var(--line-strong)}
+  .deva{font-family:"Noto Serif Devanagari","IBM Plex Serif",serif; color:var(--accent); font-weight:600}
+  .eyebrow{
+    font:600 12px/1 "IBM Plex Mono",monospace; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 14px;
+  }
+  h1{
+    font:700 clamp(34px,5.5vw,52px)/1.08 "IBM Plex Serif",Georgia,serif;
+    margin:0 0 18px; text-wrap:balance; letter-spacing:-.01em;
+  }
+  .standfirst{max-width:64ch; font-size:18px; color:var(--ink-soft); margin:0 0 26px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{
+    font:500 12.5px/1 "IBM Plex Mono",monospace; padding:7px 12px;
+    border:1px solid var(--line-strong); border-radius:999px; color:var(--mute);
+  }
+  .chip strong{color:var(--ink); font-weight:600}
+
+  /* ---------- sections ---------- */
+  section{padding:44px 0 8px; border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+  h2{
+    font:600 27px/1.2 "IBM Plex Serif",Georgia,serif; margin:6px 0 18px; text-wrap:balance;
+  }
+  h3{font:600 17px/1.3 "IBM Plex Sans",sans-serif; margin:28px 0 10px}
+  p{max-width:70ch; margin:0 0 14px}
+  p.wide{max-width:none}
+  ul,ol{max-width:70ch; margin:0 0 16px; padding-left:22px}
+  li{margin-bottom:7px}
+  li::marker{color:var(--accent)}
+  strong{font-weight:600}
+  a{color:var(--accent); text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+  code,.mono{font-family:"IBM Plex Mono",monospace; font-size:.9em}
+  code{background:var(--code-bg); padding:2px 6px; border-radius:4px}
+
+  /* ---------- callouts ---------- */
+  .panel{
+    background:var(--card-tint); border:1px solid var(--line);
+    border-radius:10px; padding:20px 22px; margin:20px 0;
+  }
+  .panel .label{
+    font:600 11.5px/1 "IBM Plex Mono",monospace; letter-spacing:.12em;
+    text-transform:uppercase; margin:0 0 10px; display:block;
+  }
+  .panel p:last-child{margin-bottom:0}
+  .panel.verdict{background:var(--accent-wash); border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+  .panel.verdict .label{color:var(--accent)}
+  .panel.good{background:var(--safe-wash); border-color:color-mix(in srgb,var(--safe) 30%,var(--line))}
+  .panel.good .label{color:var(--safe)}
+  .panel.risk{background:var(--danger-wash); border-color:color-mix(in srgb,var(--danger) 30%,var(--line))}
+  .panel.risk .label{color:var(--danger)}
+
+  /* ---------- tables ---------- */
+  .tblwrap{overflow-x:auto; margin:18px 0 24px; border:1px solid var(--line); border-radius:10px; background:var(--card)}
+  table{border-collapse:collapse; width:100%; font-size:14.5px}
+  th{
+    text-align:left; font:600 11.5px/1.3 "IBM Plex Mono",monospace;
+    letter-spacing:.09em; text-transform:uppercase; color:var(--mute);
+    padding:12px 14px; border-bottom:2px solid var(--line-strong); white-space:nowrap;
+  }
+  td{padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums; font-family:"IBM Plex Mono",monospace; font-size:13.5px; white-space:nowrap}
+  td .name{font-family:"IBM Plex Mono",monospace; font-size:13.5px; font-weight:600}
+  .tag{
+    display:inline-block; font:600 11px/1 "IBM Plex Mono",monospace; letter-spacing:.05em;
+    padding:4px 8px; border-radius:5px; white-space:nowrap;
+  }
+  .tag.disk{background:var(--safe-wash); color:var(--safe)}
+  .tag.dl{background:var(--accent-wash); color:var(--accent)}
+  .tag.gpu{background:var(--danger-wash); color:var(--danger)}
+  .tag.cpu{background:var(--safe-wash); color:var(--safe)}
+
+  /* ---------- architecture flow ---------- */
+  .flow{display:grid; gap:10px; margin:20px 0 26px}
+  .flow-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px}
+  .node{
+    background:var(--card); border:1.5px solid var(--line-strong); border-radius:10px;
+    padding:14px 16px; font-size:13.5px; line-height:1.45;
+  }
+  .node b{display:block; font:600 13px/1.3 "IBM Plex Mono",monospace; margin-bottom:6px}
+  .node.a b{color:var(--accent)} .node.b b{color:var(--safe)} .node.c b{color:var(--danger)}
+  .node.meta{background:var(--accent-wash); border-color:color-mix(in srgb,var(--accent) 40%,var(--line-strong))}
+  .node .sub{color:var(--mute); font-size:12.5px}
+  .flow-join{
+    text-align:center; color:var(--mute);
+    font:600 12px/1 "IBM Plex Mono",monospace; letter-spacing:.1em; padding:2px 0;
+  }
+
+  /* ---------- phases ---------- */
+  .phase{display:grid; grid-template-columns:64px 1fr; gap:16px; padding:16px 0; border-top:1px solid var(--line)}
+  .phase:first-of-type{border-top:none}
+  .phase .no{
+    font:600 13px/1.2 "IBM Plex Mono",monospace; color:var(--accent); padding-top:2px;
+  }
+  .phase h4{margin:0 0 6px; font:600 15.5px/1.3 "IBM Plex Sans",sans-serif}
+  .phase p{margin:0; font-size:14.5px; color:var(--ink-soft); max-width:none}
+
+  /* ---------- stat tiles ---------- */
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:20px 0}
+  .tile{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px}
+  .tile .k{font:600 30px/1.1 "IBM Plex Serif",serif; font-variant-numeric:tabular-nums}
+  .tile .k small{font-size:15px; color:var(--mute); font-family:"IBM Plex Sans",sans-serif; font-weight:500}
+  .tile .l{font:500 12.5px/1.4 "IBM Plex Sans",sans-serif; color:var(--mute); margin-top:5px}
+  .tile.hot .k{color:var(--accent)}
+
+  footer{margin-top:56px; padding-top:20px; border-top:3px double var(--line-strong); font-size:13px; color:var(--mute)}
+  .src{font-size:13.5px; columns:2; column-gap:36px; max-width:none}
+  .src li{break-inside:avoid; margin-bottom:8px}
+  @media (max-width:640px){ .src{columns:1} .phase{grid-template-columns:52px 1fr} }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">IDBI Innovate 2026 · Track 04 · Default Prediction Model</p>
+  <h1><span class="deva">सारथी</span> Model Battle Plan</h1>
+  <p class="standfirst">How to ship the strongest MSME default-prediction model in the field — trained entirely on public data, pre-loaded into the hosted app, and demonstrably ready for IDBI's own API schema — without signing for their sandbox.</p>
+  <div class="chips">
+    <span class="chip">Prepared <strong>31 Aug 2026</strong></span>
+    <span class="chip">Path <strong>No-NDA / own data</strong></span>
+    <span class="chip">Training corpus <strong>~3.5M loans · ~25M transactions</strong></span>
+    <span class="chip">GPU budget <strong>20–30 h (free-able)</strong></span>
+  </div>
+</header>
+
+<!-- ══════════════════════════ 1. STATUS ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Where you stand</p>
+  <h2>Is a real model working today? Yes — but nothing is <em>trained in advance</em></h2>
+  <p>The hosted app trains a genuine LightGBM with isotonic calibration <strong>from scratch on every upload</strong> (verified: AUC 0.97 on real SBA data, leakage-free). That makes SAARTHI an excellent adaptive AutoML tool — but it ships <strong>no pre-trained model artifact</strong>. IDBI's brief asks for a <em>trained model for default prediction</em>. A judge who uploads a tiny or unlabeled file today sees the system's weakest behaviour, not its best.</p>
+  <div class="panel">
+    <span class="label">Known gaps to close (from code review)</span>
+    <ul style="margin-bottom:0">
+      <li><strong>No persisted model</strong> — nothing survives a restart; every demo is a cold start.</li>
+      <li><strong>Calibration metrics are optimistic</strong> — ECE/Brier are computed on the same fold the isotonic calibrator is fit on; ~75% of displayed PDs are in-sample. Needs a third split.</li>
+      <li><strong>TabPFN path never fires</strong> — the library was never installed, yet the UI says "Trying TabPFN foundation model".</li>
+      <li><strong>Transaction &amp; social features don't exist yet</strong> — the feature builder is tabular one-hot only; "text purpose" is a 24-keyword count.</li>
+    </ul>
+  </div>
+  <div class="panel verdict">
+    <span class="label">Strategy in one sentence</span>
+    <p>Convert SAARTHI from "trains on whatever you upload" into <strong>"arrives pre-trained on 3.5M public loans and 25M transactions, then fine-tunes on your book in minutes"</strong> — which is strictly stronger than either a static model or an AutoML tool, and matches the brief exactly.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 2. DATASETS ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Data arsenal</p>
+  <h2>Public datasets, ranked by what they buy you</h2>
+  <p class="wide">Six are already on this machine in <code>/home/Debz/Hackathon/Dataset</code>. Five more are worth downloading (Kaggle keys already configured). Everything is mapped into the canonical schema that already exists in <code>pipeline/canonical.py</code>, extended with GST-behavioural fields copied from IDBI's own Data Field Requirements document.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Dataset</th><th>Scale</th><th>What it contributes</th><th>Status</th></tr>
+    <tr><td><span class="name">SBA National</span></td><td class="num">899K loans</td><td><strong>Closest public analogue to MSME lending</strong> — real small-business loans with PIF/CHGOFF outcomes, sector (NAICS), term, guarantees. Your anchor dataset.</td><td><span class="tag disk">ON DISK</span></td></tr>
+    <tr><td><span class="name">Lending Club</span></td><td class="num">2.26M loans</td><td>Rich borrower features + charge-off labels 2007–2018. Its issue-date column enables <strong>temporal-stability validation</strong> (train ≤2015, test 2016–18).</td><td><span class="tag disk">ON DISK</span></td></tr>
+    <tr><td><span class="name">Berka (PKDD'99)</span></td><td class="num">682 loans · 1.05M txns</td><td><strong>Real bank transaction sequences tied to loan outcomes.</strong> The only public dataset that directly rehearses transaction-as-language → default.</td><td><span class="tag disk">ON DISK</span></td></tr>
+    <tr><td><span class="name">Taiwan Default</span></td><td class="num">30K</td><td>6 months of repayment/billing history per client — mini behavioural panel; standard academic benchmark to quote.</td><td><span class="tag disk">ON DISK</span></td></tr>
+    <tr><td><span class="name">German Credit</span></td><td class="num">1K</td><td>The citation benchmark every reviewer knows; also your small-data demo for TabPFN.</td><td><span class="tag disk">ON DISK</span></td></tr>
+    <tr><td><span class="name">Kiva</span></td><td class="num">671K microloans</td><td>Loan-purpose <em>text</em> in an emerging-market MSME register — corpus for the text-distress feature. No default label; pretraining only.</td><td><span class="tag disk">ON DISK</span></td></tr>
+    <tr><td><span class="name">Amex Default Prediction</span></td><td class="num">459K customers × 13 statements</td><td><strong>The best public behavioural-credit dataset in existence</strong> — monthly statement sequences with default labels. Community int8 versions (~2 GB) avoid the 50 GB raw. Winning recipes are published.</td><td><span class="tag dl">DOWNLOAD</span></td></tr>
+    <tr><td><span class="name">Home Credit (2018)</span></td><td class="num">307K apps, 7 tables</td><td>Multi-table credit data (bureau, previous apps, installments) — rehearses exactly the multi-API joins IDBI's catalogue implies (APIs 391/402/408/393).</td><td><span class="tag dl">DOWNLOAD</span></td></tr>
+    <tr><td><span class="name">Home Credit Stability (2024)</span></td><td class="num">~1.5M cases</td><td>Newest large credit dataset; its <em>stability-over-time</em> metric is a judging talking point banks care about.</td><td><span class="tag dl">DOWNLOAD</span></td></tr>
+    <tr><td><span class="name">IBM TabFormer</span></td><td class="num">24M card txns</td><td>Large synthetic transaction corpus — <strong>pretraining fuel for the transaction encoder</strong> (this is the dataset the TabBERT paper itself uses).</td><td><span class="tag dl">DOWNLOAD</span></td></tr>
+    <tr><td><span class="name">Give Me Some Credit</span></td><td class="num">150K</td><td>Quick extra benchmark; delinquency-history features map to IDBI API 402 semantics.</td><td><span class="tag dl">DOWNLOAD</span></td></tr>
+  </table></div>
+  <div class="panel risk">
+    <span class="label">Licensing guardrail</span>
+    <p>Kaggle competition data (Amex, Home Credit) is licensed for the competition/research use — fine for a hackathon prototype and paper, but say "trained on public research datasets" in the deck, and keep the <em>shipped</em> global model trained on the clean-license core (SBA, Lending Club, Berka, Taiwan, German) with Amex/Home Credit used for validation and pre-training experiments.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 3. ARCHITECTURE ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ The model</p>
+  <h2>Three pillars and a stacker</h2>
+  <p>Every serious benchmark and both landmark Kaggle credit competitions agree on the same shape: <strong>gradient boosting remains the backbone for tabular credit risk</strong>, sequence models add real lift when transaction history exists, and foundation models win on small data. So don't pick one — build the ensemble the evidence prescribes, and keep SAARTHI's judge-verified explainability layer on top (no competitor will have it).</p>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="node a"><b>PILLAR A · GBDT CORE</b>LightGBM + XGBoost + CatBoost, 5-fold bagged, trained on the pooled canonical corpus.<div class="sub">The proven winner: Amex &amp; Home Credit top solutions are all GBDT-centred. Ships as <code>saarthi_global.pkl</code>.</div></div>
+      <div class="node b"><b>PILLAR B · TXN-AS-LANGUAGE</b>CoLES contrastive encoder (pytorch-lifestream) pretrained on TabFormer 24M + Berka 1M + Amex sequences → 256-d borrower embedding.<div class="sub">Sberbank's production-proven recipe (SIGMOD '22); TabBERT is the stretch goal.</div></div>
+      <div class="node c"><b>PILLAR C · FOUNDATION MODEL</b>TabPFN v2 (Nature 2025) as ensemble member for portfolios ≤10K rows — where hackathon demo uploads actually live.<div class="sub">Install it for real this time. Use v2 (permissive license), not 2.5 (research-only).</div></div>
+    </div>
+    <div class="flow-join">▼ &nbsp; out-of-fold predictions + embeddings &nbsp; ▼</div>
+    <div class="flow-row">
+      <div class="node meta"><b>META-LAYER</b>Logistic stacker → isotonic calibration on an <strong>untouched third split</strong> → discrete-time hazard head for the 12-month curve → SHAP + faithfulness-judge explanation layer (unchanged — your moat).</div>
+    </div>
+  </div>
+
+  <h3>How this lands in the existing codebase</h3>
+  <ul>
+    <li><strong>Fix the split first</strong> — <code>model.py</code> goes from 2-way to 3-way (fit / calibrate / test); metrics move to the untouched fold. Half a day, and it makes every number you publish defensible.</li>
+    <li><strong>Global model at startup</strong> — the Flask app loads <code>saarthi_global.pkl</code>; an upload without labels gets scored instantly (new capability!), an upload with labels gets the current fine-tune path plus the global score as a stacked feature.</li>
+    <li><strong>Transaction ingestion</strong> — new canonical entity: a transactions file (date, amount, dr/cr, narration, balance) keyed by loan-id, exactly the shape of IDBI API 393's response. The CoLES encoder turns each borrower's sequence into an embedding appended to the feature matrix.</li>
+    <li><strong>Survival upgrade</strong> — where panel data exists (Berka, Amex, Taiwan), fit a discrete-time logistic hazard model instead of the Weibull heuristic; keep the "estimated" label honest where it doesn't.</li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════ 4. INDIA FIT ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Suiting IDBI without IDBI's data</p>
+  <h2>The GST simulation layer — your unfair advantage</h2>
+  <p>You already hold IDBI's exact schemas: the Data Field Requirements PDF (GST behavioural fields) and the 25-API catalogue with full request/response JSON. Nobody needs the sandbox to <em>demonstrate readiness for it</em>.</p>
+  <ul>
+    <li><strong>GST feature simulator</strong> — upgrade <code>make_sample_data.py</code> into a generator that emits every field in their GST response (filing delays, turnover growth, ITC mismatch, customer concentration…), with default propensity calibrated to published RBI Financial Stability Report MSME GNPA levels. Train the model with these features present, so the moment real GST data appears, the pipeline already speaks it.</li>
+    <li><strong>Mock IDBI APIs</strong> — a tiny local service that serves synthetic borrowers in the byte-exact shapes of API 391 (loan master), 402 (overdue/NPA), 393 (statement with narration). The demo then shows SAARTHI <em>consuming IDBI's own interfaces</em> live — a plug-in-ready story with zero NDA exposure.</li>
+    <li><strong>Social/digital signals</strong> — keep as a roadmap slide plus synthetic fields (presence flag, review rating, posting recency) in the simulator. Without consented real data this must stay demo-tier; presenting it as governed-by-consent shows maturity, not weakness.</li>
+  </ul>
+  <div class="panel good">
+    <span class="label">Why this wins</span>
+    <p>Every other team either signed the NDA (and is now stuck integrating in a locked sandbox) or trained a generic Kaggle model. You show up with a pre-trained model, published-benchmark numbers, <em>and</em> a live demo speaking IDBI's own API dialect — plus a verified-explanation layer nobody else has.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ 5. EVALUATION ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Proof</p>
+  <h2>Evaluation protocol that survives judges and reviewers</h2>
+  <ul>
+    <li><strong>Leave-one-dataset-out</strong> — train the global model on all-but-one corpus, test on the held-out one. This is the honest measure of "will it transfer to IDBI's book," and it's the headline table for both deck and paper.</li>
+    <li><strong>Temporal stability</strong> — Lending Club by vintage (≤2015 → 2016–18) and the Home Credit 2024 stability metric. Banks fear score drift more than they love AUC.</li>
+    <li><strong>Calibration done right</strong> — ECE/Brier only on the untouched test fold, with reliability diagrams. Today's near-zero ECE is an artifact of fitting and scoring isotonic on the same fold; fixing it turns a paper-killer into a talking point.</li>
+    <li><strong>Published baselines to beat</strong> — SBA ≈ 0.95+ AUC (literature), Taiwan ≈ 0.78, Home Credit winner 0.805, Amex metric 0.80. Land within a point of these and you're provably state-of-competition, not just "high AUC on my own CSV."</li>
+    <li><strong>Ablation ladder</strong> — GBDT alone → +txn embeddings → +TabPFN → +stacker. One chart that justifies every architectural choice and doubles as the paper's core figure.</li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════ 6. GPU ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Compute</p>
+  <h2>Do you need a GPU? Only for one pillar — and it's nearly free</h2>
+  <p>This VPS (32-core EPYC, 31 GB RAM, no GPU) handles everything except sequence-encoder pretraining. That one job wants a GPU for a few sessions, and the free tier covers it.</p>
+  <div class="tiles">
+    <div class="tile hot"><div class="k">20–30<small> h</small></div><div class="l">Total GPU budget, core plan (T4-class)</div></div>
+    <div class="tile"><div class="k">0<small> ₹</small></div><div class="l">Cost via Kaggle free GPUs — 30 h/week allowance covers the whole plan</div></div>
+    <div class="tile"><div class="k">~$12<small> alt</small></div><div class="l">Rented RTX 4090 (~$0.35/h) if you want it done in one overnight run</div></div>
+  </div>
+  <div class="tblwrap"><table>
+    <tr><th>Workload</th><th>Hardware</th><th>Wall time</th><th>Where</th></tr>
+    <tr><td>GBDT global ensemble, 3.5M pooled rows, 5-fold × 3 libraries</td><td><span class="tag cpu">CPU</span></td><td class="num">2–6 h / sweep</td><td>This VPS (32 cores)</td></tr>
+    <tr><td>CoLES pretraining — 25M transactions (TabFormer + Berka + Amex)</td><td><span class="tag gpu">GPU</span></td><td class="num">12–20 h on T4 · 4–8 h on 4090</td><td>Kaggle / rented</td></tr>
+    <tr><td>Encoder fine-tune on labelled sequences (Berka, Amex)</td><td><span class="tag gpu">GPU</span></td><td class="num">4–8 h on T4</td><td>Kaggle</td></tr>
+    <tr><td>TabPFN v2 inference (≤10K-row portfolios)</td><td><span class="tag cpu">CPU</span></td><td class="num">minutes</td><td>This VPS / hosted app</td></tr>
+    <tr><td>Stacker + calibration + survival head + full evaluation suite</td><td><span class="tag cpu">CPU</span></td><td class="num">&lt;2 h</td><td>This VPS</td></tr>
+    <tr><td><em>Stretch:</em> TabBERT hierarchical transformer instead of CoLES</td><td><span class="tag gpu">GPU</span></td><td class="num">+20–30 h on T4</td><td>Only if time allows</td></tr>
+  </table></div>
+  <p><strong>No-GPU fallback exists:</strong> CoLES on this VPS's 32 cores over a 5M-transaction subsample ≈ 1–2 days wall time. Painful but viable — the plan does not die without a GPU; it just runs overnight twice.</p>
+</section>
+
+<!-- ══════════════════════════ 7. SCHEDULE ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Fourteen days</p>
+  <h2>Build schedule</h2>
+  <div class="phase"><div class="no">D 1–2</div><div><h4>Foundations</h4><p>Download Amex (int8), Home Credit ×2, TabFormer, GMSC. Extend canonical schema with GST-behavioural + transaction entities. Fix the 3-way split and the evaluation harness — every later number depends on this being right.</p></div></div>
+  <div class="phase"><div class="no">D 3–5</div><div><h4>Global GBDT ensemble</h4><p>Pooled canonical training, per-dataset heads, leave-one-dataset-out table. First deck-ready numbers vs published baselines. Ship <code>saarthi_global.pkl</code> loading at app startup.</p></div></div>
+  <div class="phase"><div class="no">D 6–9</div><div><h4>Transaction-as-language</h4><p>pytorch-lifestream CoLES pretraining on Kaggle GPUs; validate embeddings on Berka loan outcomes (the clean end-to-end proof); wire embeddings into the feature matrix and the upload path for transaction CSVs.</p></div></div>
+  <div class="phase"><div class="no">D 10–11</div><div><h4>Foundation model + meta-layer</h4><p>Install TabPFN v2 for real; build the stacker; recalibrate; discrete-time hazard head; ablation ladder run.</p></div></div>
+  <div class="phase"><div class="no">D 12–13</div><div><h4>India-fit demo</h4><p>GST simulator emitting IDBI's exact response fields; mock APIs 391/402/393; hosted app demo flow: "point SAARTHI at IDBI-shaped endpoints → portfolio report in minutes."</p></div></div>
+  <div class="phase"><div class="no">D 14</div><div><h4>Freeze &amp; tell the story</h4><p>Evaluation report, reliability diagrams, ablation chart, updated deck figures, demo dry-run. No model changes after this day.</p></div></div>
+</section>
+
+<!-- ══════════════════════════ 8. RISKS ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Eyes open</p>
+  <h2>What can sink this, and the counter for each</h2>
+  <div class="tblwrap"><table>
+    <tr><th>Risk</th><th>Counter</th></tr>
+    <tr><td>Amex download/compute balloons (raw is ~50 GB)</td><td>Use the community int8-compressed version (~2 GB); Amex is validation fuel, not a shipping dependency.</td></tr>
+    <tr><td>Cross-dataset transfer looks weak in leave-one-out</td><td>That's a finding, not a failure — it motivates the fine-tune-on-your-book story, which is SAARTHI's existing strength. Frame it.</td></tr>
+    <tr><td>TabPFN licensing questions on stage</td><td>v2 weights are permissively licensed (2.5 is research-only — don't ship it). One sentence in the deck kills the question.</td></tr>
+    <tr><td>Judges ask "but does it work on <em>Indian</em> data?"</td><td>GST simulator calibrated to RBI-published MSME NPA levels + the mock-IDBI-API demo + "fine-tunes on the bank's book in minutes, on-prem, data never leaves."</td></tr>
+    <tr><td>Time squeeze</td><td>Strict cut order: TabBERT first, then Home Credit 2024, then Amex. The core plan (GBDT + CoLES + TabPFN + GST demo) survives every cut.</td></tr>
+  </table></div>
+</section>
+
+<!-- ══════════════════════════ SOURCES ══════════════════════════ -->
+<section>
+  <p class="eyebrow">§ Evidence</p>
+  <h2>Sources</h2>
+  <ul class="src">
+    <li><a href="https://arxiv.org/pdf/2205.10535">Deep Learning vs. Gradient Boosting: benchmarking for credit scoring (arXiv 2205.10535)</a></li>
+    <li><a href="https://www.nature.com/articles/s41586-024-08328-6">TabPFN v2 — Accurate predictions on small data with a tabular foundation model (Nature, 2025)</a></li>
+    <li><a href="https://arxiv.org/pdf/2511.08667">TabPFN-2.5 technical report (arXiv 2511.08667) — note research-only weights</a></li>
+    <li><a href="https://github.com/PriorLabs/TabPFN">PriorLabs/TabPFN (GitHub)</a></li>
+    <li><a href="https://medium.com/mission-lane-tech-blog/tabicl-under-the-microscope-benchmarking-tabular-foundation-models-for-enterprise-credit-risk-ad8315f9bec4">Mission Lane — benchmarking tabular foundation models for enterprise credit risk</a></li>
+    <li><a href="https://arxiv.org/pdf/2605.18147">Foundation Models for Credit Risk Prediction: Game Changer or False Hope? (arXiv 2605.18147)</a></li>
+    <li><a href="https://github.com/pytorch-lifestream/pytorch-lifestream">pytorch-lifestream — CoLES transaction embeddings (GitHub)</a></li>
+    <li><a href="https://arxiv.org/pdf/2404.02047">Learning transaction representations for information management in banks (arXiv 2404.02047)</a></li>
+    <li><a href="https://github.com/IBM/TabFormer">IBM TabFormer — TabBERT code + 24M synthetic transactions (GitHub)</a></li>
+    <li><a href="https://ar5iv.labs.arxiv.org/html/2011.01843">Tabular Transformers for Multivariate Time Series (ICASSP 2021)</a></li>
+    <li><a href="https://arxiv.org/pdf/2310.13818">FATA-Trans: field- and time-aware transformer for sequential tabular data</a></li>
+    <li><a href="https://www.kaggle.com/competitions/amex-default-prediction">Amex Default Prediction (Kaggle) — top solutions: GBDT + Transformer ensembles</a></li>
+    <li><a href="https://www.kaggle.com/competitions/amex-default-prediction/writeups/ci-2-k-uncle-giba-13th-place-gold-solution">Amex 13th-place gold write-up (stacked GBDT ensembles)</a></li>
+    <li><a href="https://www.kaggle.com/competitions/home-credit-credit-risk-model-stability">Home Credit — Credit Risk Model Stability (Kaggle 2024)</a></li>
+    <li><a href="https://www.researchgate.net/publication/392139110_Exploring_MSME_Loan_Defaults_The_Role_of_Borrower_and_Loan_Characteristics_from_a_Micro-level_Perspective">Exploring MSME loan defaults — Indian micro-level perspective</a></li>
+    <li><a href="https://arxiv.org/pdf/2503.18029">Unleashing the power of text for credit default prediction (arXiv 2503.18029)</a></li>
+  </ul>
+</section>
+
+<footer>
+  SAARTHI · IDBI Innovate 2026 · internal planning document · compiled from code review of the live repository plus literature and competition evidence, 31 August 2026.
+</footer>
+</div>
