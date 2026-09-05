@@ -119,10 +119,30 @@ def train_and_score(bundle: FeatureBundle,
     Xs = X.iloc[train_idx]
     ys = y.iloc[train_idx]
 
-    # stratified train/val split
-    progress("train", 35, "Splitting train / validation")
-    X_tr, X_val, y_tr, y_val = train_test_split(
-        Xs, ys, test_size=0.25, stratify=ys, random_state=SETTINGS.random_seed)
+    # ---- strict THREE-way split: fit / calibrate / test -----------------
+    # The calibrator must never be fitted on the fold used to report
+    # calibration error: isotonic regression is flexible enough to drive ECE
+    # to ~0 on data it has already seen, which makes the number meaningless.
+    progress("train", 35, "Splitting fit / calibrate / test")
+    three_way = len(Xs) >= 400 and int(ys.sum()) >= 40
+    if three_way:
+        X_tr, X_rest, y_tr, y_rest = train_test_split(
+            Xs, ys, test_size=0.40, stratify=ys,
+            random_state=SETTINGS.random_seed)
+        strat2 = y_rest if y_rest.nunique() > 1 and y_rest.value_counts().min() >= 2 else None
+        X_cal, X_test, y_cal, y_test = train_test_split(
+            X_rest, y_rest, test_size=0.625, stratify=strat2,
+            random_state=SETTINGS.random_seed)
+    else:
+        # too few rows/positives to afford three folds - fall back and say so
+        X_tr, X_cal, y_tr, y_cal = train_test_split(
+            Xs, ys, test_size=0.25, stratify=ys,
+            random_state=SETTINGS.random_seed)
+        X_test, y_test = X_cal, y_cal
+        warnings.append("This file is small, so the calibration and test folds "
+                        "had to be shared — treat the calibration score (ECE) as "
+                        "optimistic.")
+    X_val, y_val = X_cal, y_cal          # calibrator fits here
 
     # ---- model router ----------------------------------------------------
     model_type = "lightgbm"
@@ -145,15 +165,19 @@ def train_and_score(bundle: FeatureBundle,
         else:
             calibrated = CalibratedClassifierCV(raw, method="isotonic", cv="prefit")
         calibrated.fit(X_val, y_val)
-        val_prob = calibrated.predict_proba(X_val)[:, 1]
+        test_prob = calibrated.predict_proba(X_test)[:, 1]
     except Exception:  # noqa: BLE001
         warnings.append("Probability calibration was skipped for this run; "
                         "scores use the model's raw probabilities.")
         calibrated = None
-        val_prob = _proba(raw, X_val)
+        test_prob = _proba(raw, X_test)
 
-    # ---- metrics on validation ------------------------------------------
-    metrics = _metrics(y_val.values, val_prob, n)
+    # ---- metrics on the HELD-OUT test fold ------------------------------
+    # Neither the boosters nor the calibrator have seen these rows, so AUC and
+    # ECE are both genuine out-of-sample estimates.
+    metrics = _metrics(y_test.values, test_prob, n)
+    metrics["split"] = ("fit/calibrate/test" if three_way
+                        else "fit/calibrate (shared test - small file)")
 
     # ---- score ALL rows (batched) ---------------------------------------
     progress("train", 72, "Scoring all loans")
