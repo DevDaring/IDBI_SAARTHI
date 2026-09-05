@@ -35,3 +35,6 @@ saarthi/frontend/dist/
 saarthi/data/*.csv
 *.log
 .DS_Store
+
+# submission deck kept local, not published
+Final_Submission/
