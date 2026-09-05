@@ -18,7 +18,7 @@ from __future__ import annotations
 import os
 import uuid
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
@@ -75,6 +75,41 @@ def _pretrained_info() -> dict:
 def pretrained_endpoint():
     """What the shipped global model is and how it scored on held-out data."""
     return jsonify(_pretrained_info())
+
+
+# --- sample loan books, so anyone can try the app without their own data ---
+SAMPLES = {
+    "msme_demo.csv": "Synthetic MSME loan book — 3,000 loans, Indian sectors and "
+                     "states, with a genuine default signal.",
+    "credit_applicants.csv": "German-credit-style book — 1,000 rows, different "
+                             "column names and a 1/2 target, to exercise the mapper.",
+}
+_SAMPLE_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+
+
+@app.get("/api/samples")
+def list_samples():
+    out = []
+    for name, desc in SAMPLES.items():
+        p = os.path.join(_SAMPLE_DIR, name)
+        if os.path.exists(p):
+            out.append({"name": name, "description": desc,
+                        "bytes": os.path.getsize(p),
+                        "url": f"/api/samples/{name}"})
+    return jsonify({"samples": out})
+
+
+@app.get("/api/samples/<path:name>")
+def download_sample(name):
+    if name not in SAMPLES:
+        return jsonify({"error": f"unknown sample '{name}'",
+                        "available": sorted(SAMPLES)}), 404
+    path = os.path.join(_SAMPLE_DIR, name)
+    if not os.path.exists(path):
+        return jsonify({"error": "sample not deployed on this server"}), 404
+    return send_file(path, mimetype="text/csv", as_attachment=True,
+                     download_name=name)
 
 
 @app.post("/api/upload")

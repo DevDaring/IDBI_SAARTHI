@@ -15,7 +15,8 @@ frontend/dist/
 frontend/.vite/
 
 # data (regenerate with scripts/make_sample_data.py)
-data/*.csv
+# demo books are committed on purpose so anyone can test the live app
+# data/*.csv
 
 # misc
 .DS_Store
