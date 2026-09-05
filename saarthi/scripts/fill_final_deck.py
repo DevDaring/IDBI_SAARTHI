@@ -401,7 +401,7 @@ def main():
     prs = Presentation(SRC)
     fill(prs)
     prs.save(SRC)
-    print(f"filled {len(prs.slides.__iter__.__self__._sldIdLst)} slides -> {SRC}")
+    print(f"filled deck ({len(prs.slides)} slides) -> {SRC}")
 
 
 if __name__ == "__main__":
